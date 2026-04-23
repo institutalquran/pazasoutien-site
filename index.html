@@ -1,78 +1,143 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>PazaSoutien</title>
-<style>
-  body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    background-color: #c0c8d8; /* couleur douce, proche site */
-    color: #333;
-  }
-  /* Barre de navigation simple */
-  .navbar {
-    background-color: #746ebc; /* violet */
-    color: white;
-    padding: 15px 30px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .logo {
-    font-weight: bold;
-    font-size: 1.6rem;
-  }
-  .nav-links a {
-    color: white;
-    text-decoration: none;
-    font-weight: 600;
-  }
-  /* Section hero simple */
-  .hero {
-    max-width: 900px;
-    margin: 50px auto;
-    padding: 20px;
-  }
-  .hero h1 {
-    font-size: 2.5rem;
-    margin-bottom: 0.5rem;
-  }
-  .hero p {
-    font-size: 1.1rem;
-    margin-bottom: 1.5rem;
-  }
-  .btn-primary {
-    background-color: #746ebc;
-    color: white;
-    padding: 10px 25px;
-    border: none;
-    border-radius: 25px;
-    font-weight: bold;
-    text-decoration: none;
-  }
-  .btn-primary:hover {
-    background-color: #5e59a6;
-  }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PazaSoutien - Site dynamique</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #bcc4d6;
+      color: #333;
+    }
+    /* Navbar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #746ebc;
+      color: white;
+      padding: 1rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .navbar .logo {
+      font-weight: bold;
+      font-size: 1.5rem;
+    }
+    .navbar nav a {
+      color: white;
+      text-decoration: none;
+      margin-left: 1.5rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .navbar nav a:hover {
+      text-decoration: underline;
+    }
+    /* Sections */
+    section {
+      max-width: 900px;
+      margin: 3rem auto;
+      padding: 1rem 2rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      display: none; /* caché par défaut */
+    }
+    section.active {
+      display: block; /* affiché quand actif */
+    }
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+    p {
+      margin-bottom: 1.5rem;
+      font-size: 1.1rem;
+    }
+    button {
+      background-color: #746ebc;
+      color: white;
+      border: none;
+      border-radius: 25px;
+      padding: 10px 25px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 1rem;
+    }
+    button:hover {
+      background-color: #5e59a6;
+    }
+  </style>
 </head>
 <body>
 
-<header>
-  <nav class="navbar">
-    <div class="logo">PazaSoutien</div>
-    <div class="nav-links">
-      <a href="#accueil">Accueil</a>
-    </div>
+<div class="navbar">
+  <div class="logo">PazaSoutien</div>
+  <nav>
+    <a href="#" data-target="accueil">Accueil</a>
+    <a href="#" data-target="cours">Cours</a>
+    <a href="#" data-target="tarifs">Tarifs</a>
+    <a href="#" data-target="contact">Contact</a>
   </nav>
-</header>
+</div>
 
-<section class="hero" id="accueil">
+<section id="accueil" class="active">
   <h1>Soutien Scolaire en Ligne pour Tous les Âges</h1>
   <p>Maths, Français, Anglais, etc.</p>
-  <a href="#cours" class="btn-primary">Découvrir les Cours</a>
+  <button onclick="goToSection('cours')">Découvrir les Cours</button>
 </section>
+
+<section id="cours">
+  <h1>Nos Cours Disponibles</h1>
+  <ul>
+    <li>Mathématiques - CP à 3ème</li>
+    <li>Français - Tous niveaux</li>
+    <li>Anglais - de A1 à C1</li>
+    <li>Histoire-Géo - Collège & Lycée</li>
+  </ul>
+  <button onclick="goToSection('tarifs')">Voir les Tarifs</button>
+</section>
+
+<section id="tarifs">
+  <h1>Nos Tarifs</h1>
+  <ul>
+    <li>Découverte : 9€/mois (2h cours/mois)</li>
+    <li>Standard : 29€/mois (10h cours/mois + suivi)</li>
+    <li>Premium : 49€/mois (Cours illimités, support prioritaire)</li>
+  </ul>
+  <button onclick="goToSection('contact')">Contactez-nous</button>
+</section>
+
+<section id="contact">
+  <h1>Contact</h1>
+  <p>Mail : contact@pazasoutien.fr</p>
+  <p>Téléphone : 01 23 45 67 89</p>
+  <button onclick="goToSection('accueil')">Retour Accueil</button>
+</section>
+
+<script>
+  // Fonction pour afficher une section en la rendant "active" et cacher les autres
+  function goToSection(id) {
+    document.querySelectorAll('section').forEach(sec => {
+      sec.classList.toggle('active', sec.id === id);
+    });
+  }
+
+  // Gestion clics sur le menu de navigation
+  document.querySelectorAll('.navbar nav a').forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const targetId = link.getAttribute('data-target');
+      goToSection(targetId);
+      // Scroll vers le haut
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  });
+</script>
 
 </body>
 </html>
