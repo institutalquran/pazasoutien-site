@@ -1,161 +1,94 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PazaSoutien - Soutien Scolaire en Ligne</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>PazaSoutien</title>
+<style>
+  body { font-family: Arial, sans-serif; margin:0; }
+  .navbar {
+    background-color: #746ebc;
+    color: white;
+    padding: 10px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .logo img {
+    height: 40px; vertical-align: middle;
+  }
+  .nav-links a {
+    color: white;
+    margin-left: 20px;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  .hero {
+    background-color: #d6dde8;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 80px 20px;
+  }
+  .hero-content h1 {
+    font-size: 2.5rem;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  .hero-content p {
+    font-size: 1.2rem;
+    color: #333;
+  }
+  .btn-primary {
+    display: inline-block;
+    padding: 12px 30px;
+    background-color: #746ebc;
+    color: white;
+    text-decoration: none;
+    border-radius: 30px;
+    margin-top: 20px;
+    font-weight: bold;
+  }
+  .hero-image img {
+    max-width: 400px;
+    border-radius: 12px;
+  }
+  @media (max-width: 768px) {
+    .hero {
+      flex-direction: column;
+      text-align: center;
+      padding: 40px 20px;
+    }
+    .hero-image {
+      margin-top: 30px;
+    }
+  }
+</style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <nav class="navbar">
-            <div class="logo">
-                <i class="fas fa-graduation-cap"></i>
-                <span>PazaSoutien</span>
-            </div>
-            <ul class="nav-links">
-                <li><a href="#accueil">Accueil</a></li>
-                <li><a href="#cours">Cours</a></li>
-                <li><a href="#tarifs">Tarifs</a></li>
-                <li><a href="#contact">Contact</a></li>
-                <li><a href="#" class="btn-login" onclick="toggleLogin()">Connexion</a></li>
-            </ul>
-            <div class="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </nav>
-    </header>
 
-    <!-- Hero Section -->
-    <section id="accueil" class="hero">
-        <div class="hero-content">
-            <h1>Soutien Scolaire en Ligne pour Tous les Âges</h1>
-            <p>Maths, Français, Anglais et plus ! Cours interactifs, exercices corrigés et suivi personnalisé.</p>
-            <div class="hero-buttons">
-                <a href="#cours" class="btn-primary">Découvrir les Cours</a>
-                <a href="#tarifs" class="btn-secondary">Voir les Tarifs</a>
-            </div>
-        </div>
-        <div class="hero-image">
-            <i class="fas fa-chalkboard-teacher"></i>
-        </div>
-    </section>
-
-    <!-- Cours Section -->
-    <section id="cours" class="cours">
-        <h2>Nos Cours Disponibles</h2>
-        <div class="cours-grid">
-            <div class="cours-card">
-                <i class="fas fa-calculator"></i>
-                <h3>Mathématiques</h3>
-                <p>CP à 3ème - Algèbre, Géométrie, Problèmes</p>
-                <span class="niveau">Débutant → Avancé</span>
-            </div>
-            <div class="cours-card">
-                <i class="fas fa-book-open"></i>
-                <h3>Français</h3>
-                <p>Orthographe, Grammaire, Lecture, Rédaction</p>
-                <span class="niveau">Tous niveaux</span>
-            </div>
-            <div class="cours-card">
-                <i class="fas fa-globe"></i>
-                <h3>Anglais</h3>
-                <p>Vocabulaire, Grammaire, Conversation</p>
-                <span class="niveau">A1 → C1</span>
-            </div>
-            <div class="cours-card">
-                <i class="fas fa-history"></i>
-                <h3>Histoire-Géo</h3>
-                <p>Chronologie, Cartes, Actualité</p>
-                <span class="niveau">Collège → Lycée</span>
-            </div>
-        </div>
-    </section>
-
-    <!-- Tarifs -->
-    <section id="tarifs" class="tarifs">
-        <h2>Nos Formules</h2>
-        <div class="tarifs-grid">
-            <div class="tarif-card">
-                <h3>Découverte</h3>
-                <div class="prix">9€/mois</div>
-                <ul>
-                    <li>2h de cours/mois</li>
-                    <li>Accès exercices</li>
-                    <li>Support email</li>
-                </ul>
-                <a href="#" class="btn-primary">Choisir</a>
-            </div>
-            <div class="tarif-card popular">
-                <span class="popular-badge">Populaire</span>
-                <h3>Standard</h3>
-                <div class="prix">29€/mois</div>
-                <ul>
-                    <li>10h de cours/mois</li>
-                    <li>Exercices + corrigés</li>
-                    <li>Support chat</li>
-                    <li>Suivi personnalisé</li>
-                </ul>
-                <a href="#" class="btn-primary">Choisir</a>
-            </div>
-            <div class="tarif-card">
-                <h3>Premium</h3>
-                <div class="prix">49€/mois</div>
-                <ul>
-                    <li>Cours illimités</li>
-                    <li>Support prioritaire</li>
-                    <li>Plan personnalisé</li>
-                    <li>Certificat</li>
-                </ul>
-                <a href="#" class="btn-primary">Choisir</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Modal Login -->
-    <div id="loginModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="toggleLogin()">&times;</span>
-            <h2>Connexion / Inscription</h2>
-            <form id="loginForm">
-                <input type="email" placeholder="Email" required>
-                <input type="password" placeholder="Mot de passe" required>
-                <button type="submit">Se connecter</button>
-                <p>Pas de compte ? <a href="#">S'inscrire</a></p>
-            </form>
-        </div>
+<header>
+  <nav class="navbar">
+    <div class="logo">
+      <img src="images/logo-paza.png" alt="Logo PazaSoutien" />
+      <span>PazaSoutien</span>
     </div>
+    <div class="nav-links">
+      <a href="#accueil">Accueil</a>
+    </div>
+  </nav>
+</header>
 
-    <!-- Footer -->
-    <footer id="contact">
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3>PazaSoutien</h3>
-                <p>Soutien scolaire en ligne pour réussir à l'école !</p>
-            </div>
-            <div class="footer-section">
-                <h4>Contact</h4>
-                <p><i class="fas fa-envelope"></i> contact@pazasoutien.fr</p>
-                <p><i class="fas fa-phone"></i> 01 23 45 67 89</p>
-            </div>
-            <div class="footer-section">
-                <h4>Suivez-nous</h4>
-                <div class="social-links">
-                    <a href="#"><i class="fab fa-facebook"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-youtube"></i></a>
-                </div>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2024 PazaSoutien. Tous droits réservés.</p>
-        </div>
-    </footer>
+<section class="hero" id="accueil">
+  <div class="hero-content">
+    <h1>Soutien Scolaire en Ligne pour Tous les Âges</h1>
+    <p>Maths, Français, Anglais, etc.</p>
+    <a href="#cours" class="btn-primary">Découvrir les Cours</a>
+  </div>
+  <div class="hero-image">
+    <img src="images/hero.png" alt="Illustration soutien scolaire" />
+  </div>
+</section>
 
-    <script src="script.js"></script>
 </body>
 </html>
