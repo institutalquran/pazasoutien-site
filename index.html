@@ -3,76 +3,173 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>PazaSoutien</title>
+<title>PazaSoutien Dynamique</title>
 <style>
   body {
     margin: 0;
-    background-color: #b1b8cd; /* fond gris clair */
     font-family: Arial, sans-serif;
-    color: #222;
   }
   header {
     position: fixed;
-    top: 0; left: 0; right:0;
+    top: 0; left: 0; right: 0;
+    background-color: #8478be; /* violet */
     height: 50px;
-    background-color: #8379c9; /* violet */
     color: white;
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
     padding: 0 20px;
     box-sizing: border-box;
     font-weight: bold;
-    font-size: 1.1rem;
     z-index: 1000;
   }
+  header .logo {
+    font-size: 1.3rem;
+  }
+  nav a {
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+    margin-left: 20px;
+    font-weight: 600;
+  }
+  nav a:hover {
+    text-decoration: underline;
+  }
+
   main {
-    margin-top: 80px;
-    padding: 0 20px;
-    max-width: 900px;
-    margin-left: auto;
-    margin-right: auto;
+    padding: 100px 20px 40px 20px;
+    min-height: calc(100vh - 100px);
+    background-color: #b0b4ca; /* fond bleu clair */
+    color: #222;
     text-align: left;
+    max-width: 900px;
+    margin: 0 auto;
+    border-radius: 10px;
   }
-  h1 {
-    font-size: 2.2rem;
-    margin-bottom: 0.3rem;
+  main h1 {
+    font-size: 2rem;
+    margin-bottom: 0.2rem;
   }
-  p {
+  main p {
     margin-bottom: 1.5rem;
-    font-size: 1rem;
+    font-size: 1.1rem;
   }
   button {
-    background-color: #8379c9; /* bouton violet */
+    background-color: #8478be; /* violet */
     border: none;
     border-radius: 20px;
     padding: 10px 20px;
     color: white;
     font-weight: bold;
-    cursor: pointer;
     font-size: 1rem;
+    cursor: pointer;
   }
   button:hover {
-    background-color: #6a5fc4;
+    background-color: #6d62b2;
   }
-  a {
-    color: white;
-    text-decoration: none;
+  form {
+    max-width: 400px;
+    margin-top: 1rem;
+  }
+  label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+  input[type="text"], input[type="email"], input[type="password"] {
+    width: 100%;
+    padding: 8px 10px;
+    margin-bottom: 15px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+  }
+  ul {
+    list-style: disc inside;
+    font-size: 1.1rem;
   }
 </style>
 </head>
 <body>
 
 <header>
-  <div>PazaSoutien</div>
-  <nav><a href="#">Accueil</a></nav>
+  <div class="logo">PazaSoutien</div>
+  <nav>
+    <a onclick="showPage('accueil')">Accueil</a>
+    <a onclick="showPage('tarif')">Tarif</a>
+    <a onclick="showPage('inscription')">Inscription</a>
+  </nav>
 </header>
 
-<main>
-  <h1>Soutien Scolaire en Ligne pour Tous les Âges</h1>
-  <p>Maths, Français, Anglais, etc.</p>
-  <button>Découvrir les Cours</button>
+<main id="content">
+  <!-- Contenu chargé dynamiquement -->
 </main>
+
+<script>
+  // Pages HTML au format string
+  const pages = {
+    accueil: `
+      <h1>Soutien Scolaire en Ligne pour Tous les Âges</h1>
+      <p>Maths, Français, Anglais, etc.</p>
+      <button onclick="showPage('cours')">Découvrir les Cours</button>
+    `,
+    cours: `
+      <h1>Nos Cours Disponibles</h1>
+      <ul>
+        <li>Mathématiques - CP à 3ème</li>
+        <li>Français - Tous niveaux</li>
+        <li>Anglais - De A1 à C1</li>
+        <li>Histoire-Géo - Collège & Lycée</li>
+      </ul>
+      <button onclick="showPage('tarif')">Voir les Tarifs</button>
+    `,
+    tarif: `
+      <h1>Nos Tarifs</h1>
+      <ul>
+        <li>Découverte : 9€/mois (2h de cours / mois)</li>
+        <li>Standard : 29€/mois (10h de cours / mois + suivi personnalisé)</li>
+        <li>Premium : 49€/mois (Cours illimités, support prioritaire)</li>
+      </ul>
+      <button onclick="showPage('inscription')">S'inscrire</button>
+    `,
+    inscription: `
+      <h1>Formulaire d'Inscription</h1>
+      <form id="signupForm">
+        <label for="name">Nom complet</label>
+        <input type="text" id="name" name="name" required />
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required />
+        <label for="password">Mot de passe</label>
+        <input type="password" id="password" name="password" required />
+        <button type="submit">S'inscrire</button>
+      </form>
+      <p id="formMessage" style="color:green; margin-top:1rem; display:none;">Inscription réussie !</p>
+    `
+  };
+
+  function showPage(page) {
+    const content = document.getElementById('content');
+    content.innerHTML = pages[page] || '<p>Page non trouvée</p>';
+    if(page === 'inscription') setupForm();
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+
+  function setupForm(){
+    const form = document.getElementById('signupForm');
+    const message = document.getElementById('formMessage');
+    if(!form) return;
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      // Pour demo: simple validation OK
+      message.style.display = 'block';
+      form.reset();
+    });
+  }
+
+  // Afficher page accueil par défaut
+  showPage('accueil');
+</script>
 
 </body>
 </html>
